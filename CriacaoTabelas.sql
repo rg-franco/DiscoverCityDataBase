@@ -1,10 +1,9 @@
-drop schema if exists db_touristMatch;
+drop schema if exists db_discoveryCity;
 
-create schema db_touristMatch;
+create schema db_discoveryCity;
 
-use db_touristMatch;
+use db_discoveryCity;
 
-/*Aqui é quais as preferencias do restaurante por exemplo comidas veganas, lugares calmos etc*/
 CREATE TABLE categoria (
     id INT NOT NULL AUTO_INCREMENT,
     categoria VARCHAR(100) NOT NULL,
@@ -61,7 +60,7 @@ CREATE TABLE donoEstabelecimento (
     id_estabelecimento INT NOT NULL,
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT pk_donoEstabelecimento PRIMARY KEY (id, id_estabelecimento)
+    CONSTRAINT pk_donoEstabelecimento PRIMARY KEY (id_usuario, id_estabelecimento)
 );
 
 CREATE TABLE favoritos(
