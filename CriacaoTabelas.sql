@@ -30,7 +30,9 @@ CREATE TABLE estabelecimento (
     descricao TEXT,
     site VARCHAR(100),
     imagem VARCHAR(100),
-    data_abertura DATE,
+    inicio_funcionamento time,
+    fim_funcionamento time,
+    dias_funcionamento VARCHAR(30),
     hora_funcionamento VARCHAR(50),
     menu_url VARCHAR(100),
     tipo_pagamento VARCHAR(100),
@@ -63,9 +65,10 @@ CREATE TABLE donoEstabelecimento (
     CONSTRAINT pk_donoEstabelecimento PRIMARY KEY (id_usuario, id_estabelecimento)
 );
 
-CREATE TABLE favoritos(
+CREATE TABLE lugaresVisitados (
     id_usuario INT NOT NULL,
     id_estabelecimento INT NOT NULL,
+    favorito boolean,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
 );
@@ -76,6 +79,7 @@ CREATE TABLE avaliacao (
     id_usuario int not null,
     comentarios VARCHAR(100),
     nota float,
+    data_avaliacao date,
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     PRIMARY KEY (id)
