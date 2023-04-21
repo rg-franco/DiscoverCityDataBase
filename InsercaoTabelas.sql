@@ -1,3 +1,4 @@
+-- Inserindo registros na tabela categoria
 INSERT INTO categoria (categoria) VALUES
   ('Restaurante'),
   ('Pizzaria'),
@@ -17,3 +18,27 @@ INSERT INTO contato (email, telefone, id_estabelecimento) VALUES
   ('contato@restaurantedelicia.com.br', '(11) 1234-5678', 1),
   ('contato@pizzariamassafina.com.br', '(11) 2345-6789', 2),
   ('contato@bardojoao.com.br', '(21) 3456-7890', 3);
+
+INSERT INTO cupons (id, codigo, data_validade, descricao, id_estabelecimento)
+VALUES
+  (1, 'CUPOM123', '2023-05-01', 'Desconto de 10% em qualquer prato do cardápio', 1),
+  (2, 'PIZZA456', '2023-06-30', 'Ganhe uma pizza grande na compra de uma pizza média', 2),
+  (3, 'CERVEJA789', '2023-08-31', 'Compre 3 cervejas e ganhe uma porção de batatas fritas', 3);
+  
+INSERT INTO usuario (nome, email, senha) VALUES 
+  ('João', 'joao@gmail.com', 'senha123'),
+  ('Maria', 'maria@gmail.com', 'senha456'),
+  ('Pedro', 'pedro@gmail.com', 'senha789');
+
+INSERT INTO donoEstabelecimento (id_usuario, id_estabelecimento)
+VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+  
+INSERT INTO avaliacao (id_estabelecimento, id_usuario, comentarios, nota, data_avaliacao)
+VALUES ((1, 1, 'Excelente atendimento e comida deliciosa!', 4.5, '2022-04-19'), 
+(2, 2, 'O lugar é muito bonito, mas o atendimento deixou a desejar.', 3.2, '2022-04-20'));
+  
+
+
