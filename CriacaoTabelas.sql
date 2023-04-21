@@ -93,3 +93,12 @@ CREATE TABLE contato (
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE cupons (
+  id INT PRIMARY KEY,
+  codigo VARCHAR(10),
+  data_validade DATE,
+  descricao VARCHAR(255),
+  id_estabelecimento INT,
+  FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimentos(id)
+);
