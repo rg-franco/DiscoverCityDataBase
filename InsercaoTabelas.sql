@@ -1,41 +1,19 @@
 INSERT INTO categoria (categoria) VALUES
-('Comida Japonesa'),
-('Comida Italiana'),
-('Comida Brasileira'),
-('Comida Mexicana'),
-('Comida Indiana'),
-('Comida Árabe'),
-('Cafeteria'),
-('Churrascaria'),
-('Pizzaria'),
-('Hamburgueria');
+  ('Restaurante'),
+  ('Pizzaria'),
+  ('Bar');
 
-INSERT INTO endereco (rua, numero, cidade, cep, estado, pais) VALUES
-('Rua A', 123, 'São Paulo', '01234-567', 'São Paulo', 'Brasil'),
-('Rua B', 456, 'Rio de Janeiro', '98765-432', 'Rio de Janeiro', 'Brasil'),
-('Rua C', 789, 'Belo Horizonte', '45678-901', 'Minas Gerais', 'Brasil'),
-('Rua D', 321, 'Curitiba', '76543-210', 'Paraná', 'Brasil'),
-('Rua E', 654, 'Salvador', '54321-098', 'Bahia', 'Brasil'),
-('Rua F', 987, 'Recife', '21098-765', 'Pernambuco', 'Brasil'),
-('Rua G', 246, 'Porto Alegre', '89012-345', 'Rio Grande do Sul', 'Brasil'),
-('Rua H', 135, 'Fortaleza', '32109-876', 'Ceará', 'Brasil'),
-('Rua I', 864, 'Natal', '65432-109', 'Rio Grande do Norte', 'Brasil'),
-('Rua J', 279, 'Brasília', '10987-654', 'Distrito Federal', 'Brasil');
+INSERT INTO estabelecimento (nome, id_categoria, media_nota, descricao, site, imagem, inicio_funcionamento, fim_funcionamento, dias_funcionamento, hora_funcionamento, menu_url, tipo_pagamento) VALUES
+  ('Restaurante Delícia', 1, 4.5, 'Comida caseira deliciosa', 'http://www.restaurantedelicia.com.br', 'restaurante.jpg', '08:00:00', '22:00:00', 'Segunda a sábado', '08:00 - 22:00', 'http://www.restaurantedelicia.com.br/menu', 'Dinheiro, Cartão de Crédito, Cartão de Débito'),
+  ('Pizzaria Massa Fina', 2, 4.0, 'As melhores pizzas da cidade', 'http://www.pizzariamassafina.com.br', 'pizzaria.jpg', '17:00:00', '23:00:00', 'Terça a domingo', '17:00 - 23:00', 'http://www.pizzariamassafina.com.br/cardapio', 'Dinheiro, Cartão de Crédito'),
+  ('Bar do João', 3, 3.5, 'Ambiente descontraído e animado', 'http://www.bardojoao.com.br', 'bar.jpg', '18:00:00', '02:00:00', 'Todos os dias', '18:00 - 02:00', 'http://www.bardojoao.com.br/cardapio', 'Dinheiro, Cartão de Crédito, Cartão de Débito');
 
-INSERT INTO estabelecimento (id_endereco, nome, id_categoria, media_nota, descricao, site, imagem, data_abertura, hora_funcionamento, menu_url, tipo_pagamento) VALUES
-(1, 'Restaurante do Japa', 1, 0, 'Restaurante japonês com opções de sushi, sashimi e pratos quentes.', 'www.restaurantedojapa.com.br', 'www.restaurantedojapa.com.br/menu', '2020-01-01', '11:00 - 23:00', 'menujapa.pdf', 'Cartão de crédito, débito e dinheiro'),
-(2, 'Pasta & Vino', 2, 0, 'Restaurante italiano com massas artesanais e carta de vinhos selecionados.', 'www.pastaevino.com.br', 'www.pastaevino.com.br/menu', '2019-05-15', '12:00 - 22:00', 'menupastaevino.pdf', 'Cartão de crédito e débito'),
-(3, 'Bar do Mineiro', 3, 0, 'Restaurante de comida brasileira com opções de pratos típicos mineiros.', 'www.bardomineiro.com.br', 'www.bardomineiro.com.br/menu', '2018-07-30', '11:30 - 00:00', 'menubardomineiro.pdf', 'Cartão de crédito, débito e dinheiro');
+INSERT INTO endereco (id_estabelecimento, rua, numero, cidade, cep, estado, pais) VALUES
+  (1, 'Rua das Flores', 123, 'São Paulo', '01234-567', 'São Paulo', 'Brasil'),
+  (2, 'Rua dos Sabores', 456, 'São Paulo', '04567-890', 'São Paulo', 'Brasil'),
+  (3, 'Avenida da Alegria', 789, 'Rio de Janeiro', '23456-789', 'Rio de Janeiro', 'Brasil');
 
 INSERT INTO contato (email, telefone, id_estabelecimento) VALUES
-('contato@restaurantedojapa.com.br', '(11) 5555-5555', 1),
-('contato@pastaevino.com.br', '(11) 4444-4444', 2),
-('contato@bardomineiro.com.br', '(11) 3333-3333', 3);
-
-INSERT INTO usuario (nome, id_categoria) VALUES ('Paulo Santos', 1);
-
-INSERT INTO login (usuario_id, email, senha) VALUES (1, 'paulo_santos@gmail.com', 'senha123');
-
-INSERT INTO donoEstabelecimento (id_usuario, id_estabelecimento) VALUES (1, 1);
-
-
+  ('contato@restaurantedelicia.com.br', '(11) 1234-5678', 1),
+  ('contato@pizzariamassafina.com.br', '(11) 2345-6789', 2),
+  ('contato@bardojoao.com.br', '(21) 3456-7890', 3);
