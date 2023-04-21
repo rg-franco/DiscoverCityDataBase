@@ -39,28 +39,22 @@ CREATE TABLE endereco (
     pais VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE usuario (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    id_categoria int,
-    FOREIGN KEY (id_categoria) REFERENCES categoria(id),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE login (
-	usuario_id int not null,
     email VARCHAR(50) NOT NULL,
     senha VARCHAR(50) NOT NULL,
-	FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-    PRIMARY KEY (usuario_id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE donoEstabelecimento (
     id_usuario int not null,
     id_estabelecimento INT NOT NULL,
-    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
+    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
+    ON DELETE CASCADE,
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     CONSTRAINT pk_donoEstabelecimento PRIMARY KEY (id_usuario, id_estabelecimento)
 );
@@ -80,7 +74,8 @@ CREATE TABLE avaliacao (
     comentarios VARCHAR(100),
     nota float,
     data_avaliacao date,
-    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
+    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
+    ON DELETE CASCADE,
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     PRIMARY KEY (id)
 );
@@ -90,7 +85,8 @@ CREATE TABLE contato (
     email VARCHAR(100) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
     id_estabelecimento INT NOT NULL,
-    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id),
+    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
+    ON DELETE CASCADE,
     PRIMARY KEY (id)
 );
 
@@ -101,4 +97,5 @@ CREATE TABLE cupons (
   descricao VARCHAR(255),
   id_estabelecimento INT,
   FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
+  ON DELETE CASCADE
 );
