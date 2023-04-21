@@ -10,20 +10,8 @@ CREATE TABLE categoria (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE endereco (
-    id INT NOT NULL AUTO_INCREMENT,
-    rua VARCHAR(100) NOT NULL,
-    numero INT NOT NULL,
-    cidade VARCHAR(50) NOT NULL,
-    cep VARCHAR(10) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
-    pais VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE estabelecimento (
     id INT NOT NULL AUTO_INCREMENT,
-    id_endereco INT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     id_categoria INT NOT NULL,
     media_nota FLOAT,
@@ -36,9 +24,21 @@ CREATE TABLE estabelecimento (
     hora_funcionamento VARCHAR(50),
     menu_url VARCHAR(100),
     tipo_pagamento VARCHAR(100),
-    FOREIGN KEY (id_endereco) REFERENCES endereco(id),
     FOREIGN KEY (id_categoria) REFERENCES categoria(id),
     PRIMARY KEY (id)
+);
+
+CREATE TABLE endereco (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_estabelecimento int,
+    rua VARCHAR(100) NOT NULL,
+    numero INT NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    pais VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
 );
 
 CREATE TABLE usuario (
@@ -100,5 +100,5 @@ CREATE TABLE cupons (
   data_validade DATE,
   descricao VARCHAR(255),
   id_estabelecimento INT,
-  FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimentos(id)
+  FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
 );
