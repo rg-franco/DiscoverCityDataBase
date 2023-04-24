@@ -1,35 +1,22 @@
+drop procedure if exists cupomValido;
+SET SQL_SAFE_UPDATES = 0;
 delimiter ||
-CREATE PROCEDURE cupomValido()
-	DECLARE @cupon_id INT;
-	DECLARE @data_validade DATE;
-	DECLARE @hoje DATE;
+create procedure cupomValido()
+begin
+    declare status_consulta date;
+	DECLARE cur CURSOR FOR SELECT data_validade FROM cupons;
 
-	SET @hoje = GETDATE();
+    open cur;
+		start_loop: loop
+			fetch cur into status_consulta;
+				if status_consulta < curdate() then
+					update cupons set valido = false;
+                end if;
+		end loop;
+    close cur;
+	
+end ||
 
-	DECLARE cupon_cursor CURSOR FOR
-	SELECT id, data_validade
-	FROM cupons;
-
-	OPEN cupon_cursor;
-
-	FETCH NEXT FROM cupon_cursor INTO @cupon_id, @data_validade;
-
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-	   IF @data_validade > @hoje
-	   BEGIN
-		  UPDATE cupons
-		  SET codigo = "ok"
-		  WHERE id = @cupon_id;
-	   END
-	   
-	   FETCH NEXT FROM cupon_cursor INTO @cupon_id, @data_validade;
-	END;
-	delimiter ||
-
-	CLOSE cupon_cursor;
-	DEALLOCATE cupon_cursor;
 delimiter ;
 
-
-call cupomValido()
+call cupomValido();
