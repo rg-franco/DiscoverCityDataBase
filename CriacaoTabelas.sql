@@ -14,14 +14,13 @@ CREATE TABLE estabelecimento (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     id_categoria INT NOT NULL,
-    media_nota FLOAT,
+    media_nota FLOAT default 0.00,
     descricao TEXT,
     site VARCHAR(100),
     imagem VARCHAR(100),
     inicio_funcionamento time,
     fim_funcionamento time,
     dias_funcionamento VARCHAR(30),
-    hora_funcionamento VARCHAR(50),
     menu_url VARCHAR(100),
     tipo_pagamento VARCHAR(100),
     FOREIGN KEY (id_categoria) REFERENCES categoria(id),
@@ -29,8 +28,7 @@ CREATE TABLE estabelecimento (
 );
 
 CREATE TABLE endereco (
-    id INT NOT NULL AUTO_INCREMENT,
-    id_estabelecimento int,
+    id_estabelecimento int primary key,
     rua VARCHAR(100) NOT NULL,
     numero INT NOT NULL,
     bairro varchar(50) not null,
@@ -38,7 +36,6 @@ CREATE TABLE endereco (
     cep VARCHAR(10) NOT NULL,
     estado VARCHAR(50) NOT NULL,
     pais VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id),
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
     ON DELETE CASCADE
 );
@@ -47,7 +44,7 @@ CREATE TABLE usuario (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    senha VARCHAR(50) NOT NULL,
+    senha VARCHAR(50),
     PRIMARY KEY (id)
 );
 
@@ -57,13 +54,13 @@ CREATE TABLE donoEstabelecimento (
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
     ON DELETE CASCADE,
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT pk_donoEstabelecimento PRIMARY KEY (id_usuario, id_estabelecimento)
+    CONSTRAINT pk_donoEstabelecimento PRIMARY KEY clustered (id_usuario, id_estabelecimento)
 );
 
 CREATE TABLE lugaresVisitados (
     id_usuario INT NOT NULL,
     id_estabelecimento INT NOT NULL,
-    favorito boolean,
+    favorito boolean default false,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
 );
@@ -74,7 +71,7 @@ CREATE TABLE avaliacao (
     id_usuario int not null,
     comentarios VARCHAR(100),
     nota float,
-    data_avaliacao date,
+    data_avaliacao date default null,
     FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
     ON DELETE CASCADE,
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id),
@@ -94,8 +91,10 @@ CREATE TABLE contato (
 CREATE TABLE cupons (
   id INT PRIMARY KEY auto_increment,
   codigo VARCHAR(10),
+  data_inicio DATE,
   data_validade DATE,
   descricao VARCHAR(255),
+  valido boolean default true,
   id_estabelecimento INT,
   FOREIGN KEY (id_estabelecimento) REFERENCES estabelecimento(id)
   ON DELETE CASCADE
