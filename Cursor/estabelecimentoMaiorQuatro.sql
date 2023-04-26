@@ -21,9 +21,8 @@ BEGIN
     READ_LOOP: LOOP
         FETCH cur INTO estabelecimento_id, estabelecimento_nome, nota;
         IF (done) THEN
-			SELECT CONCAT(estabelecimento_id, ' - ', estabelecimento_nome, ' - Nota: ', nota) AS 'Resultado';
+		SELECT CONCAT(estabelecimento_id, ' - ', estabelecimento_nome, ' - Nota: ', nota) AS 'Resultado';
         END IF;
-			LEAVE READ_LOOP;
     END LOOP;
 
     CLOSE cur;
